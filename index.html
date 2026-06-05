@@ -14,6 +14,13 @@
   <!-- Main Stylesheet & Scripts -->
   <link rel="stylesheet" href="assets/styles/global.css" />
   <script src="assets/scripts/partyHorn.js" type="module"></script>
+
+  <!-- Quick CSS rule so the A/B test actually changes the background color -->
+  <style>
+    body.blue {
+      background-color: #e6f2ff; /* A nice light blue background so it's readable */
+    }
+  </style>
 </head>
 
 <body>
@@ -42,6 +49,19 @@
       <audio class="hidden" src=""></audio>
     </section>
   </main>
+
+  <script>
+    // Generate a random number between 0 and 1
+    const randomNumber = Math.random();
+    // Determine if the class should be applied
+    const shouldApplyClass = randomNumber < 0.5;
+    // Get the body element
+    let body = document.querySelector('body');
+    // Apply or remove the "blue" class based on the random number
+    if (shouldApplyClass) {
+      body.classList.add('blue');
+    }
+  </script>
 </body>
 
 </html>
