@@ -13,36 +13,35 @@
 
   <style>
     body.blue {
-      background-color: #e6f2ff; /* Keeps styling unified across pages */
+      background-color: #e6f2ff;
     }
   </style>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Generate a random number between 0 and 1
-      const randomNumber = Math.random();
-      // Determine if the class should be applied
-      const shouldApplyClass = randomNumber < 0.5;
-      // Get the body element
-      let body = document.querySelector('body');
-      // Apply the "blue" class based on the random number
-      if (shouldApplyClass) {
-        body.classList.add('blue');
-      }
-    });
-  </script>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SG45HYV7DZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-SG45HYV7DZ');
-  </script>
 </head>
 
 <body>
+  <script>
+    (() => {
+      const layoutVariant = Math.random() < 0.5 ? 'blue' : 'control';
+      if (layoutVariant === 'blue') {
+        document.body.classList.add('blue');
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'layout_variant_assigned',
+        layout_variant: layoutVariant
+      });
+    })();
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SG45HYV7DZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments);
+    };
+    gtag('js', new Date());
+    gtag('config', 'G-SG45HYV7DZ');
+  </script>
+
   <header>
     <nav>
       <a href="index.html" title="Go to party horn">Party Horn</a>

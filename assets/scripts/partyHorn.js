@@ -1,15 +1,17 @@
-// partyHorn.js
 let partyHorn = false;
-const jsConfetti = new JSConfetti();
+let jsConfetti = null;
 
 window.addEventListener('DOMContentLoaded', init);
 
 function init() {
+  if (typeof window.JSConfetti === 'function') {
+    jsConfetti = new window.JSConfetti();
+  }
   bindListeners();
 }
 
 function bindListeners() {
-  const hornPicker = document.querySelector('#horn-select')
+  const hornPicker = document.querySelector('#horn-select');
   const volume = document.querySelector('#volume');
   const playSoundBtn = document.querySelector('#expose > button');
   hornPicker.addEventListener('input', selectHorn);
@@ -21,7 +23,7 @@ function selectHorn() {
   const imgElem = document.querySelector('#expose > img');
   const audioElem = document.querySelector('#expose > audio');
   imgElem.setAttribute('src', `assets/images/${this.value}.svg`);
-  audioElem.setAttribute('src', `assets/audio/${this.value}.mp3`)
+  audioElem.setAttribute('src', `assets/audio/${this.value}.mp3`);
   partyHorn = this.value == 'party-horn' ? true : false;
 }
 
@@ -47,7 +49,12 @@ function updateVolume() {
 
 function playSound() {
   const audioElem = document.querySelector('#expose > audio');
-  if (audioElem.getAttribute('src') == '') return;
-  if (partyHorn) setTimeout(() => jsConfetti.addConfetti(), 350);
-  audioElem.play();
+  if (!audioElem || audioElem.getAttribute('src') == '') return;
+  if (partyHorn && jsConfetti) {
+    setTimeout(() => jsConfetti.addConfetti(), 350);
+  }
+  // Codex Fix: Gracefully catch unhandled audio promise rejections
+  audioElem.play().catch((error) => {
+    console.warn('Audio playback failed or was blocked by browser:', error);
+  });
 }
