@@ -6,17 +6,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  <title>Lab 5 - Party Horn</title>
+  <title>Lab 10 - Return of the Party Horn</title>
 
-  <!-- Main Stylesheet & Scripts -->
   <link rel="stylesheet" href="assets/styles/global.css" />
   <script src="assets/scripts/speechSynth.js" type="module"></script>
+
+  <style>
+    body.blue {
+      background-color: #e6f2ff; /* Keeps styling unified across pages */
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Generate a random number between 0 and 1
+      const randomNumber = Math.random();
+      // Determine if the class should be applied
+      const shouldApplyClass = randomNumber < 0.5;
+      // Get the body element
+      let body = document.querySelector('body');
+      // Apply the "blue" class based on the random number
+      if (shouldApplyClass) {
+        body.classList.add('blue');
+      }
+    });
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SG45HYV7DZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SG45HYV7DZ');
+  </script>
 </head>
 
 <body>
   <header>
     <nav>
-      <a href="index.html" title="Go to  party horn">Party Horn</a>
+      <a href="index.html" title="Go to party horn">Party Horn</a>
     </nav>
   </header>
   <main>
