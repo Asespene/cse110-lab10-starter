@@ -27,18 +27,14 @@
 <body>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KSZ8N4W3"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1V72L6DKC"></script>
   <script>
-    (() => {
-      const layoutVariant = Math.random() < 0.5 ? 'blue' : 'control';
-      if (layoutVariant === 'blue') {
-        document.body.classList.add('blue');
-      }
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'layout_variant_assigned',
-        layout_variant: layoutVariant
-      });
-    })();
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X1V72L6DKC');
   </script>
 
   <header>
@@ -66,6 +62,23 @@
       <audio class="hidden" src=""></audio>
     </section>
   </main>
+  <script>
+    (() => {
+      const randomNumber = Math.random();
+      const shouldApplyClass = randomNumber < 0.5;
+      const body = document.querySelector('body');
+
+      if (shouldApplyClass) {
+        body.classList.add('blue');
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'layout_variant_assigned',
+        layout_variant: shouldApplyClass ? 'blue' : 'control'
+      });
+    })();
+  </script>
 </body>
 
 </html>
